@@ -16,7 +16,7 @@
             <mat-hint align="end">* Mandatory field (case-sensitive).</mat-hint>
             <mat-error *ngIf="hasError('password','required')">Required</mat-error>
             <mat-error *ngIf="hasError('password','pattern')">
-                Must contain a uppercase letter and a lowercase letter, one or more numerical digits and one of 
+                Must have at least 8 characters, contain a uppercase letter and a lowercase letter, one or more numerical digits and one of 
                 these special characters (@, #, $)
             </mat-error>
         </mat-form-field>
