@@ -64,6 +64,7 @@ export class SubmitFormComponent implements OnInit {
   }
 
   processForm() {
+    this.newForm.get('contact.countryCode').setValue(this.code);
     this.formSvc.processForm(this.newForm);
     this.router.navigate(['form','confirm'])
   }
