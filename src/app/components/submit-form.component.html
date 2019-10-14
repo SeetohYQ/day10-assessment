@@ -69,8 +69,8 @@
     <mat-label>Contact</mat-label>
     <div formGroupName="contact" fxLayout="row">
         <mat-form-field>
-            <input type="text" matInput placeholder="Country Code" formControlName="countryCode" [value]="code">
-            <mat-hint align="end">* Mandatory field.</mat-hint>
+            <input type="text" matInput placeholder="Country Code" formControlName="countryCode" readonly [value]="code">
+            <mat-hint align="end">* Auto-generated based on selected country</mat-hint>
             <mat-error *ngIf="this.newForm.get('contact.countryCode').hasError('required')">Required</mat-error>
             <mat-error *ngIf="this.newForm.get('contact.countryCode').hasError('pattern')">Only numbers, with no spaces</mat-error>
         </mat-form-field>
