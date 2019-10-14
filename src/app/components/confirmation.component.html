@@ -1,0 +1,21 @@
+<h2>Thank you! Your form has been submitted successfully.</h2>
+<div>
+    <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button type="button" [routerLink]="'[/form]'">Back</button>
+    </div>
+    <div fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>Details</mat-card-title>
+            <mat-card-subtitle>Email Address: {{formDetails.email}}</mat-card-subtitle>
+            <mat-card-subtitle>Password: {{formDetails.password}}</mat-card-subtitle>
+            <mat-card-subtitle>Name: {{formDetails.name}}</mat-card-subtitle>
+            <mat-card-subtitle>Gender: {{formDetails.gender}}</mat-card-subtitle>
+            <mat-card-subtitle>Date of Birth: {{formDetails.dob | date:'mediumDate'}}</mat-card-subtitle>
+            <mat-card-subtitle>Address: {{formDetails.address }}</mat-card-subtitle>
+            <mat-card-subtitle>Country: {{formDetails.country}}</mat-card-subtitle>
+            <mat-card-subtitle>Contact Number: {{formDetails.contact}}</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+    </div>
+</div>
