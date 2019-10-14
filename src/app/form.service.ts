@@ -22,7 +22,7 @@ export class FormService {
   }
 
   getCountryCode(countryName: string): Promise<any> {
-    const uri = 'http://restcountries.eu/rest/v2/name/' + countryName;
+    const uri = 'https://restcountries.eu/rest/v2/name/' + countryName;
 
     return this.httpSvc.get(uri).toPromise();
   }
