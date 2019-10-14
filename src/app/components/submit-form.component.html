@@ -1,34 +1,28 @@
-<h2>Personal Details</h2>
+<form [formGroup]="newForm" (ngSubmit) = "processForm()" fxLayout="column"
+    style="margin-left:30vw; margin-right:30vw"> 
+    <h2>Personal Details</h2>
+    <mat-form-field>
+        <input type = "email" matInput placeholder="Email Address" formControlName="email">
+        <mat-hint align="end">* Mandatory field.</mat-hint>
+        <mat-error *ngIf="hasError('email','required')">Required</mat-error>
+        <mat-error *ngIf="hasError('email','email')">Incorect format</mat-error>
+    </mat-form-field>
 
-<form [formGroup]="newForm" (ngSubmit) = "processForm()"> 
-    <div>
-        <mat-form-field>
-            <input type = "email" matInput placeholder="Email Address" formControlName="email">
-            <mat-hint align="end">* Mandatory field.</mat-hint>
-            <mat-error *ngIf="hasError('email','required')">Required</mat-error>
-            <mat-error *ngIf="hasError('email','email')">Incorect format</mat-error>
-        </mat-form-field>
-    </div>
+    <mat-form-field>
+        <input type = "password" matInput placeholder="Password" formControlName="password">
+        <mat-hint align="end">* Mandatory field (case-sensitive).</mat-hint>
+        <mat-error *ngIf="hasError('password','required')">Required</mat-error>
+        <mat-error *ngIf="hasError('password','pattern')">
+            Must have at least 8 characters, contain a uppercase letter and a lowercase letter, one or more numerical digits and one of 
+            these special characters (@, #, $)
+        </mat-error>
+    </mat-form-field>
 
-    <div>
-        <mat-form-field>
-            <input type = "password" matInput placeholder="Password" formControlName="password">
-            <mat-hint align="end">* Mandatory field (case-sensitive).</mat-hint>
-            <mat-error *ngIf="hasError('password','required')">Required</mat-error>
-            <mat-error *ngIf="hasError('password','pattern')">
-                Must have at least 8 characters, contain a uppercase letter and a lowercase letter, one or more numerical digits and one of 
-                these special characters (@, #, $)
-            </mat-error>
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field>
-            <input type = "name" matInput placeholder="Name" formControlName="name">
-            <mat-hint align="end">* Mandatory field.</mat-hint>
-            <mat-error *ngIf="hasError('name','required')">Required</mat-error>
-        </mat-form-field>
-    </div>
+    <mat-form-field>
+        <input type = "name" matInput placeholder="Name" formControlName="name">
+        <mat-hint align="end">* Mandatory field.</mat-hint>
+        <mat-error *ngIf="hasError('name','required')">Required</mat-error>
+    </mat-form-field>
 
     <div fxLayout="row" fxLayoutGap="5vw">
         <mat-label fxLayoutAlign="center center">Gender</mat-label>
@@ -38,37 +32,31 @@
         </mat-radio-group>
     </div>
     
-    <div>
-        <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date of Birth (MM/DD/YYYY)" formControlName="dob">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-hint align="end">* Mandatory field.</mat-hint>
-            <mat-error *ngIf="hasError('dob', 'required')">Invalid entry</mat-error>
-        </mat-form-field>
-        <mat-error *ngIf="hasError('dob', 'ageRequirement')">Must be at least 18 years old</mat-error>
-    </div>
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date of Birth (MM/DD/YYYY)" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint align="end">* Mandatory field.</mat-hint>
+        <mat-error *ngIf="hasError('dob', 'required')">Invalid entry</mat-error>
+    </mat-form-field>
+    <mat-error *ngIf="hasError('dob', 'ageRequirement')">Must be at least 18 years old</mat-error>
+    
+    <mat-form-field>
+        <textarea rows='3' matInput placeholder="Address" formControlName="address"></textarea>
+        <mat-hint align="end">* Mandatory field.</mat-hint>
+        <mat-error *ngIf="hasError('address','required')">Required</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-label>Country</mat-label>
+        <mat-select formControlName="country" (selectionChange)="populateCountryCode($event)">
+            <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-    <div>
-        <mat-form-field>
-            <textarea rows='3' matInput placeholder="Address" formControlName="address"></textarea>
-            <mat-hint align="end">* Mandatory field.</mat-hint>
-            <mat-error *ngIf="hasError('address','required')">Required</mat-error>
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field>
-            <mat-label>Country</mat-label>
-            <mat-select formControlName="country" (selectionChange)="populateCountryCode($event)">
-                <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-
-    <mat-label>Contact</mat-label>
-    <div formGroupName="contact" fxLayout="row">
-        <mat-form-field>
+    <div formGroupName="contact" style="margin-bottom:50px">
+        <mat-label style="margin-right:3vw">Contact</mat-label>
+        <mat-form-field style="width:5vw">
             <input type="text" matInput placeholder="Country Code" formControlName="countryCode" readonly [value]="code">
             <mat-hint align="end">* Auto-generated based on selected country</mat-hint>
             <mat-error *ngIf="this.newForm.get('contact.countryCode').hasError('required')">Required</mat-error>
@@ -77,7 +65,7 @@
 
         <span>-</span>
 
-        <mat-form-field>
+        <mat-form-field style="width:5vw">
             <input type="text" matInput placeholder="Area Code" formControlName="areaCode">
             <mat-hint align="end">* If applicable</mat-hint>
             <mat-error *ngIf="this.newForm.get('contact.areaCode').hasError('pattern')">Only numbers, with no spaces</mat-error>
