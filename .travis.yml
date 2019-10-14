@@ -14,6 +14,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: dist/btc-order-app
+  local_dir: dist/day10-assessment
   on:
     branch: master
